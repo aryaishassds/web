@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>عرض وتحميل نماذج ثلاثية الأبعاد</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header id="header">
+        <h1>عرض وتحميل نماذج ثلاثية الأبعاد</h1>
+    </header>
+
+    <main>
+        <section id="upload-form">
+            <input type="file" id="file-input" accept=".gltf, .glb" />
+            <button type="button" onclick="generateQRCode()">توليد رمز QR</button>
+        </section>
+
+        <section id="view-options">
+            <select id="view-option">
+                <option value="world">عرض في عالم مفتوح</option>
+                <option value="marker">عرض ثابت على ورقة</option>
+            </select>
+        </section>
+
+        <section id="controls">
+            <button id="move-up">تحريك لأعلى</button>
+            <button id="move-down">تحريك لأسفل</button>
+            <button id="rotate-left">تدوير لليسار</button>
+            <button id="rotate-right">تدوير لليمين</button>
+            <button id="zoom-in">تكبير</button>
+            <button id="zoom-out">تصغير</button>
+        </section>
+
+        <section id="qr-code"></section>
+
+        <a-scene 
+            embedded 
+            arjs="sourceType: webcam; debugUIEnabled: false;" 
+            vr-mode-ui="enabled: false">
+            <a-marker id="marker" type="barcode" value="5">
+                <a-entity id="uploaded-model" position="0 0 0" scale="1 1 1"></a-entity>
+            </a-marker>
+            <a-entity id="world-view" position="0 0 -5" scale="1 1 1"></a-entity>
+            <a-entity camera></a-entity>
+        </a-scene>
+    </main>
+
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrious/dist/qrious.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
